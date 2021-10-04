@@ -107,17 +107,19 @@ diabetes_tree_model <- decision_tree(
   set_mode("classification") %>%
   set_engine("rpart")
 
+# nem workflow e nem recipes, entã9 a versão direta, raramente usada assim
+
 credit_tree_fit <- fit(
   diabetes_tree_model,
   Diabetes ~.,
   data = dados
 )
 
-rpart.plot(credit_tree_fit$fit, roundint=FALSE, cex = 2)
+rpart.plot(credit_tree_fit$fit, roundint=FALSE, cex = 1)
 cp <- as.data.frame(credit_tree_fit$fit$cptable)
 cp
 
-
+predict(credit_tree_fit, new_data = dados, type = "prob")
 
 # exemplo 2) credit data --------------------------------------------------
 # remotes::install_github("grantmcdermott/parttree")
@@ -133,7 +135,7 @@ credit_tree_model <- decision_tree(
 ) %>%
   set_mode("classification")
 
-credit_tree_recipe <- recipe(Status ~ Seniority + Income, data = credit_data)
+credit_tree_recipe <- recipe(Status ~ ., data = credit_data)
 
 credit_tree_wf <- workflow() %>%
   add_model(credit_tree_model) %>%
