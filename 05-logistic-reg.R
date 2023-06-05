@@ -43,7 +43,7 @@ credit_recipe <- recipe(Status ~ ., data = credit_train) %>%
   step_impute_mode(all_nominal_predictors()) %>%
   step_zv(all_predictors()) %>% # zero variance filter tira se tem var que não varia
   # step_poly(all_numeric_predictors(), degree = 9) %>% # nos pred numericos, vamos fazer um monte de polinômios, mas depois vamos reguçarizar
-  step_poly(all_numeric_predictors(), degree = tune("poly")) %>%
+  step_poly(all_numeric_predictors(), degree = 9) %>%
   step_dummy(all_nominal_predictors()) # dummies nas categorias
 
 
