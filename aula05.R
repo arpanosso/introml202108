@@ -1,4 +1,165 @@
-'# super complexa
+'# Aula 01
+- ML mora nos detalhes
+- Código comentados
+- o que pode dar errado
+- teopria e prática massificada
+
+Antes de tudo deve-se definir o que é Data Science ou seja a ciencia dedadso
+envolve primeiro a importção a arrimação. as vezes pos dados estãop
+em tabelas separada,  e precisamos criar vareiaves, fazer agragçao
+juntar a base de dados
+
+isso é loop
+
+depois temos o ciclo mexe dado, trasnforma poq nao tava prionto
+visualiza, faz grafico tabela
+modelagem
+
+isso é loop
+ tudo para cumpriir o obejiutvo da análise
+ as respostas não sao concretas, mas serve para usar e construir e usar
+ para algumas coisa.
+
+modelo apra substituir variavel, o preparar para alguma coisa, ou é caro
+usar um dado, então vc modela esse dados
+
+o que for caro por exemplo, crédito para prever emprestimo em funçao dos
+dados dela ou não. SERASA vende isso para ver se a pessoa ´w boa pagadora dou
+não. ai se age em cima disso. Modelagem as vezes para variavel cara de se obter
+
+sinonimos statistical learning e machine learning
+um é para estatistica e motivaçao estatistica cuja fundamentação é mais
+proxima a estatistica, ja o de machine learning é diferente a linguagem
+e terminologia é diferente. mas se estuda modelo a partir de modeloa
+não normais. ML statsitca e ML e computação statsitica learning é a ponte entre
+ML e statistical learning
+
+
+DEFINIÇÃO
+é conveniente usar a definição origianl Artur Samuel
+programa que consegue fazer, descobrir, fazer certas tarefas sozinhos, sem
+nevessariamente programar o que tem que faze.
+em 60 samuel trabalhava com sistema baseado em conhecimento
+que o computador tinha que a prender a jogar um jogo.
+apresne coisa que não programadas.
+
+no nosso mundo passo um monte de dados para ele ee ele me fala quais as
+relacores q exeitem nos dados, e ele da a relaão que ele encontrou
+ou seja ele aprende solzinho, ele buisca sozinho, e as vezes oq ue sai
+é util para mim, as vezes consifgo usar. ele aprende sozxinho
+
+os algritmos são gerais, parendem muitas coisas, são genéricos.
+aprender a partit de dados de imputs evolui qnd inventaram e começaram
+a usar a estatisica, ai nasce a modelagem preditiva, um framework,
+conjunto de praticas e tecnologias e premissao de AD que busca gerar estimativas
+super precisas. procura-se erros pequnos no processo de modelagem, pois
+estmaos produzindo um programa de computador que vai errar pouco. fazer com que o
+pc de o erro pequeno numerico em relação ao que passo para ele.
+Prog simples q serve pra muita coisa. Modelo de regrerssão que serve pra muita coisa
+turn it in, meteorologia, diagnostico e por ai vai. desemprego, eficacia, carro
+dirigwe sozinho, pib etc... consigo atacar usando o ML para gerar esrtimativas
+precisas. para esses coisas. programa de computado que de isso para a gente
+
+
+3 estrategia de programação sozinha (Aprendizado)
+ - supervisionado: ele encontra padrão de x a y, vc da o x e y
+ ele encontra a ligação entre eles. e ele devolve a ligação entre as coisas. vc
+ passa para ele pares de y e x e ele da o padrão de identificação.
+ - não supervisionado: ao invés de falar que eu quero o y a partir do x, vc dis toma o
+ x e me diz tudo que vc consegue identificar de padrão, se existe cluster? o modelo
+ tentar identificar padrões que não necessariamente cheguem em alguma luggar.
+ depois eu psoso identificar se uma nova obs está dentro ou ofra do pad~roa, sem
+ a necssidade de predição, eu não preciso de resposta. Cluster a PCA e por ai vai
+ vc passa os dados e mostra os agrupamentos. As diferença s sao siognificativas
+ e consigo separar em tres grupos. a Diferença ´[e o tipo de dados e como foi
+ impterpretado. vc não sai de x e chega e y, vc sai do x e chega no x de novo para
+achar grupos e poir ai vai.
+ - reinforcement learning - aprenzado por reforço. é o caso do chat GPT. a estrutura é
+ diferente ele é meio termo entre os anteriore, vc entrega varios x e ele me produz
+ varios ys e avalia a nota se a resposta agradou ou não. vc avalia o quao bem e
+ o quao mal ele faz a previsão. tem diferencal, pouis eu dou o erro apenas.
+ e outra classe de modelos veja, vc da uma nota à resposta, da vairoes xzes que de
+ alguma maneira tem avalialção se o que se faz esta certo ou errrado... se esta bom ou
+ ruim, Preciso disso pois a supervidiona precisa de varios dados, e o reinforcment
+ paa problema grande da resultado bom com menos dados. Geralmente é uma rede neural
+ q aperta setinha e digo se se deu bem ou mal se venceu ou perdeu no jogo. ai faço
+ um modelo que vai aprendendo em natureza interativa. supervisionada nunca iria terminar
+ vai aprendendo de pouco em pouco. é o caso do chat gpt. uma parte é supervisionado
+ com varios prompts um humano responde a pergunta e o chat tenta reponder. o modelo
+ conecta os prompts que um humano fez e apartir do prompt ele da uma resposta parecida
+ demaneira supervisionada. Depos que ele aprende a dar as primeiras respostas eu dou
+ mesmo prompt varias vezes ou outros e ele da 500 respostas...ai vai a parte por reforço, a pessoa
+ vai ordenar as respostas. não é uma resposta concreta é uma parcial e a pessoa fala a
+ melhor e a pior. Assim a empresa consegue economizar para produzir as repoostas. Ordenar as respos
+ tas pe conveniente.
+
+ deep learning é uma super regressão - em função de um conjunto de dados eu consigo encotrar uma
+ reta no meio que explique por exemplo...modelo de linguagem de imagem com formula super
+ complicada. mas diferente com váaaarios parametros que pode usar em quase tudo.
+ e temos o 3 tipos acima.
+
+ computqador sempre tenta encontrar a melhor cola para resolver um problema
+
+
+matematicamente ML é y ~~ f(x) meu computador vai tentar encontrar  essa f()
+contruir um modelo é ajustar uma f e tipo de modelo são os programas que encontram a f
+modelo é a reta depois de ajustada e o tipo de modelo (programa que produz a reta) é
+o modelo de regressão linear. Existem outros tipode f possíveis. que podem ser bom ou ruim
+-regrssõ alinear
+-ravores são escadinhas que sobem e descen...
+
+erro ou re[siduo é] a diferença entre as duas coisas
+Yobs e Yest TYERM QUE SER cofiavel e pequeno o quanto possivel
+grau de erro do modelo é medido
+
+por que ajustar um F -
+1 - previsão as vezes o x e não tem y e essa prevusão é necessária, pois o y vai aconte
+cer a emissão do solo vai acontecer , ou o y é caro para se saber, ou simplesmente
+é a vida de uma pessoar ou a realidade das emsisões. Não importa a estrutura da F
+o erro de ve ser pqeno e posso seguir, blz...
+
+2 - possibilidade inferência. estmaos mais interessados em entender as relaçoes entre
+as vari´[aveis] e sse é uma motivação iunteressante a´pra se colocar na tese. se inspeciona
+ela, tenho uma certa resposta. ML não é muito bem para essa parte, de forma
+boa e de alguma coisa que eu consiga entender. Não tem tecnologia para
+explicar esse tipo de coisa, mas ainda está insipiente.
+
+
+poor que ajustar uma f, quais os motivos para fazer isso
+alguns são prosaicos...
+ - ordenação: vc não quer saber quem vai pagar ou quem não vai. e sim
+ quais os mais provaveis de não pagar... comesses eu posso iniciar um processo de
+ negociação. as vezses ordenar imagens para ver o que é caro e o que não é caro
+ identificar falsificação...se a nota for alta, colo qum humano para ver o que é isso...
+
+programa q controi f de predição me da f e estimativa de erro e ótimo para dizer que é melhor
+para inferencia da o resultado a f e as incertezas sobre a f, poderia ser essa ou essa
+com tal chance e tal chance.
+
+Métricas:
+
+erro é uma função dos resíduos. entre Y e Ychapeu
+RMSE - o computador usa o menor...por exemplo
+cada algoritmo adota um critério desse
+a reta foi tal ou tal pois minimizou isso aqui ou aquilo ali
+encontra-se f que da o melnor RMSE
+MAE
+R2
+MAPE
+yardstick
+
+FUNçÂO DE CUSTO é a metrica eletia pelo algortimo para minimizar...entende..
+
+escolher entre f diferentes ajustadas em varias situaçlões...
+temos que ter uma boa e prnto, escolhas mais importantes pra fazer posteriormente.
+
+
+
+
+
+
+
+super complexa
 # não são tão comuns
 # grgressao tem 300 anos
 # arvores tem poucos anos nasceu na computação
