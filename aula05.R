@@ -267,15 +267,16 @@ reg1 <- extract_fit_engine(modelo)
 reg2 <- lm(price ~ x, data = diamonds)
 
 # --------------------------------------------------------------------
-# Passo 3: Analisar as previsões
+# Passo 3: Analisar as previsões ISSO E MACHINE LEARNING
 
 novo_x <- data.frame(x = 7)
 predict(modelo, new_data = novo_x)
 # ^ esse é o "programa que se programou sozinho"
 
+#prever um dado velho, tanto faz
 so_o_x <- diamonds %>% select(x, flag_maior_que_8)
 pred <- predict(modelo, new_data =  so_o_x)
-
+# tidympdel tudo é comparável cara
 
 # aqui só vamos usar tidyverse p/ baixo
 
@@ -312,6 +313,23 @@ library(yardstick)
 
 metrics <- metric_set(rmse, mae, rsq)
 
+
+'https://yardstick.tidymodels.org/articles/metric-types.html#metrics'
+#métrica depende de contexto, as vezes vc é bom em uma, e ruim em outra
+# mas se o time ganhou isso que importa...se empatou vc olha outras
+# métricas, não tem uma melhor que a outra, mas é normal a gente não ter
+# a melhor métrica, não temos um motivo então vamos olhar todas e
+# na hora de olhar modelo, vamos olhar todas e ver que ganha em todas
+# quanto rola a confusão, tudo é parecido, ai tanto faz.
+# mas a esoclha ma métrica depende de contexto MAE igual RMSE
+# a funçaõ de custo - o pc faz conta e tnta minimizar a metrica
+# essa metrica não é escolheida por contexto e sim por motivo de algoritmo
+# acjja colhoça. tem prop teorica, é rapido ... e isso está fora do
+# controle e tem motivo técnico, e não consguimos definir isso e isso
+# é bom de saber qual a métrica do seu função de custo pois se ela
+# ganhoe em um é pq ela minimixou essa exatamente.
+
+
 # Métricas de erro
 diamonds_com_previsao %>%
   metrics(truth = price, estimate = .pred_price)
@@ -325,6 +343,284 @@ diamonds_com_previsao %>%
   rmse(truth = price, estimate = .pred_price)
 
 
+'
+aqui faltou validação cruzada.
+
+Se dados não vem de relação linear, a regrssão não dá conta de minizar os
+erros, pois a reta é simples e tem sempre uma resistncia que ela não vence
+todos os modelos tem esse problema, ele sempre vai aproximar bem, mas sempre bate
+
+O que podemos fazer? Deixar mais complexo, que faz curvinha, cobrinha, deixamos
+ele mais livre, ele samba no papel, literalmente. Ai pode acontecer o seguinte
+r1 barriga, e r2 tem mais parametro e passar por todos os dados. ai r2 comete menos
+erro, o modelo fica mais complicado com cruva ou a arvore ou polinomios, as vezes
+eu até zero o erro, Eu semore consigo fazer um polinomio que passa por todos
+os pontos, se os pontos são finitos, e acho polinomios que tem raizes nesse pontos
+e faço uma função que passe por todos os pontos, Eu consigo achar isso matema
+ticamente. Semore acho um modelo que acerta tudo, mas se aparecer pontos novos
+eu ter ajustado bem eu ajustar nos anterirores terei um comportamenteo ruim
+fora da base, o modelo só é bom para os pontos, para os demais ele não consegue
+ajustar, Mais pra frente na base, saem do controle. Devemos sempre usar modelos
+que possar controlar a sua complexidade, pois os muito complexos não são bons.
+não podem ser muito flexiveis, sobre ajuste, overfiting, e não quero modelo
+simples, para não dar o underfitting. O modelo deve ser flexivel sem overfting.
+quero usar polinomio e ficar bom. qual o poir que a reta e o melhor que a reta,
+como encontrar o meio termo? e vc tem que fazer o teste com dados que não foram
+utilizados para encontrar, ai vc consegue simular o comportamento de se observar
+os dados novos. Então vamos tentar nos antecipar a essa situação.
+Separa os dados, ajusta em um pedaço e avalia em outro. Chega uma hora que
+mesmo aumentando a complexidade, os erros não dminuem, para no grau de pol
+que vc quer. quem te fala isso é a avaliação do erro foram dos dados que vc
+austou. Esse metdos nos protege e permiter usarmos modelos arbitrariamente complexos
+Na estatistica estamos limitaso a modelos que entendemos e sabemos em varias hipoteses
+no ML permitimos muito complicados pois acreditamos no processo de Teste-ajuste.
+Esse é o ponto que vamos replicar toda a vez que ajustamos o ML, permitimos usar
+os mais complesxo.
+
+COm classificação aocnte-se a mesma coisa, pois sempre faço uma prob
+e comparo que ta perdo dela, posso fazer uma super complicada e overfitar.
+
+
+pergunta: é possivel, dentro dos dados que eu observei, eu colocar o graus da
+otimzaçao na função de custo, que otimiza os betas e o grau do polinomio? sem
+separar e sempre minimizando a funçao de cursto?
+-se dentro do fit ele buscar grau variado o modelo fica ruim, pois no fit
+ele vai buscar sempre o de menor funçao de custo...ou seja, ele não pode
+ter nada de floxibilidade do modelo, pois a decisão vai ser sempre a mais
+complexa. ENTAO preciso separar bem o q caracteriza a f e o que controla
+a flxibilidade do modelo. Tenho que tomar cuidade de separar os dados
+em treino e teste para separar. tenho que saber o que é felxivel e o que não
+é, que seja de ajuste. Isso e muito importante...que temos nome diferentes
+para isso - FLexibilidade - hyperparametro. COisas ajustada no trecho de funçaõ
+de custo eu chamo de parametro.
+
+hiperparametro é o que deixa o modelo mais malemolente, como o grau do polinomio
+deixa com mais possibilidade de variaççao
+
+Parametro são os grauzinhos do polinomio.
+
+hiperparametro separao treino e teste
+parametro so no treino
+
+modelo sem hiperparametro é mais simples, nada controla a complexidade.
+
+p é um hiperparametro - semre que aumeta melhora (numero de variaveis)
+tem que ser escolhido em quebra de treino e teste.
+
+FUnção de Perda e FUnçaõ custo é igual
+Função de Risco - o valor esperado dessa função de perda, considerando todas
+as possibilidade. que é como ser fosse a custo teórica - da-se os tres nomes
+para a mesma coisa
+
+
+Modelo mais comoplicado da melhor, mas não pode librerar geral. pois ele
+vai sempre buscao o zero no treino mas no teste se da mal.
+
+Sabsmos o que fazer, quebra a base e dois e fatio ocnjunto de função que
+uso para garantir que cobri ele inteiro. Fatia é a flexibildiade do modelo
+então tenho que ter uma estrategia de separa aleatoria
+para ajustar e um e testar em outro. Hiperparametro é um jeito especial
+de fatiar e aumentar a complexibilidade. Temos que garantir a não overfiting
+- cmplexidade do modelo é a principal. deixa o modelo complicado
+nas o programa encontra o ótimo grau de complexidade. e temos isso facial
+para definir. Ai consturimos o programa fazendo essa separação bomitinha
+modelo não comoplexo demais, e vamos ver o erro correspondente.
+
+Isso é ML, estmaos classe de modelo complicado, fatio, e acho o melhor dentro
+da classe. é isso que queremos ajustar.
+
+Custo Beneficio entre deixar complexo e menos complexo e os dados que vc
+não observou que é TREAD- OF DE VIES E VARIANCIA todos passam por esse
+trade of. Modelos muito complicados sempre exigem algum tipo de fatiamento
+para restar aos poucos para ver qual a ideal, mas sempre haverá o trade-off
+
+ao pegar os dados, sempre vou pegar os dados e vou criar a base de treino
+e a base de teste com o initial_split o teste é para o final, que fica separada
+para usar por utlimo. treino teste.
+validação escolh grau de polinmio, altura de algvores, hiperparametro
+
+depois disso vamos para a base de teste para se proteger do overfittnig
+
+
+Lembrando que a regressão existe um parametro de complesidade
+o número de variaveis, mais var que linha, sua regressão ajusta perfeitamente
+se reaproveitar a var varias vezes, ela sofre overfitting, a regressão
+faz modelos decentes então, mas a múltipla, com varia vars ou categoria a gente
+consegue controlar o overfitting. vamos treinar o tidymodels e depoios vamos ver
+regressão.
+'
+
+# Pacotes ------------------------------------------------------------------
+
+library(ggplot2)
+library(patchwork)
+library(skimr)
+library(tidymodels)
+
+
+# Dados -------------------------------------------------------------------
+data("diamonds")
+
+set.seed(8)
+diamondsinho <- diamonds %>%
+  filter(x > 0) %>%
+  group_by(x) %>%
+  sample_n(1) %>%
+  ungroup() %>%
+  sample_n(60)
+
+qplot(price, x, data = diamondsinho)
+
+# definicao do modelo -----------------------------------------------------
+especificacao_modelo <- linear_reg() %>%
+  set_engine("lm") %>%
+  set_mode("regression")
+
+# ajuste do modelo --------------------------------------------------------
+
+# head(model.matrix(~poly(x, 10), data = diamondsinho))
+ajuste_modelo1 <- especificacao_modelo %>%
+  fit(price ~ poly(x, 4), data = diamondsinho)
+ajuste_modelo2 <- especificacao_modelo %>%
+  fit(price ~ poly(x, 21), data = diamondsinho)
+
+# predicoes ---------------------------------------------------------------
+diamondsinho_com_previsao <- diamondsinho %>%
+  mutate(
+    price_pred1 = predict(ajuste_modelo1, new_data = diamondsinho)$.pred,
+    price_pred2 = predict(ajuste_modelo2, new_data = diamondsinho)$.pred
+  )
+
+# qualidade dos ajustes e graficos ----------------------------------------
+# Métricas de erro
+diamondsinho_com_previsao_longo <- diamondsinho_com_previsao %>%
+  tidyr::pivot_longer(
+    cols = starts_with("price_pred"),
+    names_to = "modelo",
+    values_to = "price_pred"
+  )
+
+diamondsinho_com_previsao_longo %>%
+  group_by(modelo) %>%
+  rmse(truth = price, estimate = price_pred)
+
+diamondsinho_com_previsao_longo %>%
+  group_by(modelo) %>%
+  rsq(truth = price, estimate = price_pred)
+
+# Pontos observados + curva da f
+diamondsinho_com_previsao_g1 <- diamondsinho_com_previsao %>%
+  ggplot() +
+  geom_point(aes(x, price)) +
+  geom_line(aes(x, price_pred2, color = 'modelo2'), size = 1) +
+  geom_line(aes(x, price_pred1, color = 'modelo1'), size = 1) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 30000))
+diamondsinho_com_previsao_g1
+
+# Observado vs Esperado
+diamondsinho_com_previsao_g2 <- diamondsinho_com_previsao %>%
+  filter(x > 0) %>%
+  tidyr::pivot_longer(
+    cols = starts_with("price_pred"),
+    names_to = "modelo",
+    values_to = "price_pred"
+  ) %>%
+  ggplot() +
+  geom_point(aes(price_pred, price, colour = modelo), size = 3) +
+  geom_abline(slope = 1, intercept = 0, colour = "purple", size = 1) +
+  theme_bw()
+diamondsinho_com_previsao_g2
+
+# resíduos vs Esperado
+diamondsinho_com_previsao_g3 <- diamondsinho_com_previsao %>%
+  filter(x > 0) %>%
+  tidyr::pivot_longer(
+    cols = starts_with("price_pred"),
+    names_to = "modelo",
+    values_to = "price_pred"
+  ) %>%
+  ggplot() +
+  geom_point(aes(price_pred, price - price_pred, colour = modelo), size = 3) +
+  geom_abline(slope = 0, intercept = 0, colour = "purple", size = 1) +
+  ylim(c(-10000,10000)) +
+  labs(y = "resíduo (y - y_chapeu)") +
+  theme_bw()
+diamondsinho_com_previsao_g3
+
+############################################################################
+############################################################################
+############################################################################
+# Agora vamos fingir que estamos em produção! (pontos vermelhos do slide)
+
+set.seed(3)
+# "dados novos chegaram..."
+diamondsinho_novos <- diamonds %>%
+  filter(x > 0) %>%
+  sample_n(100)
+
+# predicoes ---------------------------------------------------------------
+diamondsinho_novos_com_previsao <- diamondsinho_novos %>%
+  mutate(
+    price_pred1 = predict(ajuste_modelo1, new_data = diamondsinho_novos)$.pred,
+    price_pred2 = predict(ajuste_modelo2, new_data = diamondsinho_novos)$.pred
+  )
+
+# qualidade dos ajustes e graficos ----------------------------------------
+# Métricas de erro
+diamondsinho_novos_com_previsao_longo <- diamondsinho_novos_com_previsao %>%
+  tidyr::pivot_longer(
+    cols = starts_with("price_pred"),
+    names_to = "modelo",
+    values_to = "price_pred"
+  )
+
+diamondsinho_novos_com_previsao_longo %>%
+  group_by(modelo) %>%
+  rmse(truth = price, estimate = price_pred)
+
+diamondsinho_novos_com_previsao_longo %>%
+  group_by(modelo) %>%
+  rsq(truth = price, estimate = price_pred)
+
+# Pontos observados + curva da f
+diamondsinho_novos_com_previsao_g1 <- diamondsinho_novos_com_previsao %>%
+  ggplot() +
+  geom_point(aes(x, price), size = 3) +
+  geom_line(aes(x, price_pred2, color = 'modelo2'), size = 1) +
+  geom_line(aes(x, price_pred1, color = 'modelo1'), size = 1) +
+  theme_bw()
+diamondsinho_com_previsao_g1 / diamondsinho_novos_com_previsao_g1
+
+# Observado vs Esperado
+diamondsinho_novos_com_previsao_g2 <- diamondsinho_novos_com_previsao %>%
+  filter(x > 0) %>%
+  tidyr::pivot_longer(
+    cols = starts_with("price_pred"),
+    names_to = "modelo",
+    values_to = "price_pred"
+  ) %>%
+  ggplot() +
+  geom_point(aes(price_pred, price, colour = modelo), size = 3) +
+  geom_abline(slope = 1, intercept = 0, colour = "purple", size = 1) +
+  theme_bw()
+diamondsinho_com_previsao_g2 / diamondsinho_novos_com_previsao_g2
+
+# resíduos vs Esperado
+diamondsinho_novos_com_previsao_g3 <- diamondsinho_novos_com_previsao %>%
+  filter(x > 0) %>%
+  tidyr::pivot_longer(
+    cols = starts_with("price_pred"),
+    names_to = "modelo",
+    values_to = "price_pred"
+  ) %>%
+  ggplot() +
+  geom_point(aes(price_pred, price - price_pred, colour = modelo), size = 3) +
+  geom_abline(slope = 0, intercept = 0, colour = "purple", size = 1) +
+  ylim(c(-10000,10000)) +
+  labs(y = "resíduo (y - y_chapeu)") +
+  theme_bw()
+diamondsinho_com_previsao_g3 / diamondsinho_novos_com_previsao_g3
 
 
 
