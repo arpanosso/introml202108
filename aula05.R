@@ -4,6 +4,7 @@
 - o que pode dar errado
 - teopria e prática massificada
 
+# aula 01 -----------------------------------------------------------------
 Antes de tudo deve-se definir o que é Data Science ou seja a ciencia dedadso
 envolve primeiro a importção a arrimação. as vezes pos dados estãop
 em tabelas separada,  e precisamos criar vareiaves, fazer agragçao
@@ -154,7 +155,7 @@ escolher entre f diferentes ajustadas em varias situaçlões...
 temos que ter uma boa e prnto, escolhas mais importantes pra fazer posteriormente.
 
 
-
+# aula2 -------------------------------------------------------------------
 # AULA 2
 ML - programa de computado que constroi algo que faz algo pra gente
 cp devonlve o que ele acha que é uma boa relação entre x e y
@@ -622,6 +623,62 @@ diamondsinho_novos_com_previsao_g3 <- diamondsinho_novos_com_previsao %>%
   theme_bw()
 diamondsinho_com_previsao_g3 / diamondsinho_novos_com_previsao_g3
 
+
+'
+Após falar do overfiting fala-se das estratégia para se proteger dele
+
+- separas os dados de acrodo com algum critério de novo e antigo e bora lá.
+lembrando hyperparametro = complexidade, e temos um jeito de aumentar a complexidade
+em qualquer moemnto, mas não se ajusta uma reg. e se faz uma regressão regularizada
+ou seja, ela leva em conta um monte de variável tudo de uma vez e ela tenta segurar
+a liberdade do mmodelo.
+
+- Regularizçaõ: algo que segura a complexidade do modelo pouca - super ocmplexo
+muito regularização o modelo é simples, que varia pouco.
+
+Na regrsessão o que da errado, geralmente, que faz overfit é ter muita variável
+60 obs com 90 var, ajusto um beta pra cada dado e sobra 30...da overfitting.
+para proteger, controlamos a complexidade. Para esse controle LASSO escolhe
+as variáveis que são boas, mantenha somente as boas, a partir de um certo nível,
+como tamanho do beta ou eveito no erro. ele seleciona a variável. se for baixo
+entra tudo, se for alto entra somente as melhroes variáveis, ai ele estaraá muito
+regularizado. No caso da regressão o parâmetro de regulariza é o qual criteriosa [e
+a seleção de variável]. Só passa a fotrte?, ou as médias ou a fracas.
+Temos que criar o gradiente de complexidade é fazer a seleção de variáveis. A LASSO
+ao invés de otimizar o RMSE, se eu deixar otimizar solto co o p grande ele escolhe beta
+pelo o erro. ja o regularizado ele adiciona lambda vezes a soma dos médulos betas, para
+garantir que eles são irão existei no momento em que redução do RMSE for grande o
+suficiente
+Lambda é um hiperparâmetro - se for zero não mexe no valor do RSME, naõ funcionada
+se o Lambda for muito grande, para cada beta ue eu tento tirar, reduz o erro mas o
+preco que eu pago em cada beta é o lambda. Maior lambda maior preço do beta para entrar
+no modelo e conseguentemente menos beta v~´ao sobreviver. estarão no modelo
+
+RMSEreg = REMS + Lambda SumModBetas
+
+fatiamos o conunto de todas as regressões que poderíamos fazer
+todos betas não zero é igual a um modelo que metade é zero...
+nesse conjunto temos os aninhados, algus betas zerados.
+tenho um numero que quao complicado e simples está o modelo
+igual o que fizemo no polinomio. Somar a penalização e equivalente a
+se bta maior que um numero mantem, caso contrário, joga fora....e por aí vai.
+para funcionar os betas temn que estar na mesma escala então todos tem que estar
+na mesma escala. otimiza o lambida seprando treino e teste. treino por força bruta
+e vejo o erro que sobe. regularização é a seleção de variáveis, é o melhor método
+tem outros mas computacionalemnte e teoricamente é o melhor.
+
+na tese - o que é ML
+entrar na parte de funçaõ que acha
+falar de complexidade do overfitting e o a importancia da validação
+cruzara hiperparametro e parametro.
+
+Read ou Rid - Melhor que Lasso na Genetica , rid qnd tem varias coisas fazem
+importancia no processo...LAsso pega so as boa mesmo...
+dado de demendencia tmporl tmb, mas consideram o iid. as vezes
+
+
+inerpretabilidade vs predição, ultima discussão
+'
 
 
 '
